@@ -1,0 +1,54 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Article</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'home' %}"><img src="{% static 'logo.png' %}" alt="Article logo" width="200"></a></h1>
+
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                <li>
+                    <form action="{% url 'account:logout' %}" class="logout-link" method="post">
+                        {% csrf_token %} # security reasons
+                        <button type="submit">Logout!</button>
+                    </form>
+                </li>
+                <li><a href="{% url 'articles:create' %}" class="highlight">New Article</a></li>
+                {% else %}
+                    <li><a href="{% url 'account:login' %}">Login</a></li>
+                    <li><a href="{% url 'account:signup' %}">Signup</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <div class="wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+
+<footer>
+<!-- Add icon library -->
+    <p>Connect with me</p>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<!-- Add font awesome icons -->
+        <a href="https://www.facebook.com/pddivyesh" class="fa fa-facebook"></a>
+        <a href="https://github.com/Tapudp" class="fa fa-github"></a>
+
+        <a href="https://www.linkedin.com/in/divyesh-parmar-44b55797/" class="fa fa-linkedin"></a>
+      <a href="https://www.instagram.com/pbdivyesh/" class="fa fa-instagram"></a>
+      <a href="https://twitter.com/AflaatunTapudo" class="fa fa-twitter"></a>
+
+        <a href="https://www.reddit.com/user/tapu_buoy/" class="fa fa-reddit"></a>
+      <a href="https://www.snapchat.com/add/divyesh_tapu" class="fa fa-snapchat-ghost"></a>
+</footer>
+</html>

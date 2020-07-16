@@ -1,0 +1,12 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+    <h1>Signup</h1>
+    <form action="/account/signup/" class="site-form" method="post">
+        {% csrf_token %}
+        {{ arji }}
+        <input type="submit" value="Signup">
+    </form>
+
+{% endblock %}
